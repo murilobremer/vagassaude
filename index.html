@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabalhe Conosco — 3778 Saúde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:      #0A0A0A;
+    --black-mid:  #111111;
+    --black-card: #161616;
+    --black-hover:#1E1E1E;
+    --green:      #A0D585;
+    --green-dark: #6FB85A;
+    --green-soft: rgba(160,213,133,0.10);
+    --white:      #FFFFFF;
+    --off-white:  #F5F5F5;
+    --gray-50:    #1A1A1A;
+    --gray-100:   #242424;
+    --gray-300:   #666666;
+    --gray-500:   #888888;
+    --gray-700:   #BBBBBB;
+    --text:       #FFFFFF;
+    --text-muted: #888888;
+    --radius:     14px;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.4);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.5);
+    --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0 clamp(16px, 5vw, 60px);
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700; font-size: 1.2rem;
+    color: var(--white); letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--green); }
+  .nav-link {
+    color: var(--gray-500); font-size: 0.875rem; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--white); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--black);
+    position: relative; overflow: hidden;
+    padding: clamp(60px, 10vw, 100px) clamp(16px, 5vw, 60px) clamp(50px, 8vw, 80px);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -120px; right: -80px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(160,213,133,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -60px; left: 30%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(160,213,133,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 760px; position: relative; z-index: 1;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(160, 213, 133, 0.08);
+    border: 1px solid rgba(160, 213, 133, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 0.8rem; font-weight: 500;
+    color: #A0D585; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 22px;
+    animation: fadeUp 0.5s ease both;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: #A0D585;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--white); letter-spacing: -0.03em;
+    margin-bottom: 18px;
+    animation: fadeUp 0.5s 0.1s ease both;
+  }
+  h1 em { font-style: normal; color: var(--green); }
+  .hero-sub {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: var(--gray-500); max-width: 540px; line-height: 1.7;
+    animation: fadeUp 0.5s 0.2s ease both;
+  }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap;
+    animation: fadeUp 0.5s 0.3s ease both;
+  }
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat-num {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--green);
+  }
+  .stat-label { font-size: 0.78rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* ── FILTERS ── */
+  .filters-bar {
+    background: var(--black-mid);
+    border-bottom: 1px solid var(--gray-100);
+    position: sticky; top: 64px; z-index: 90;
+    box-shadow: var(--shadow-sm);
+  }
+  .filters-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 14px clamp(16px, 5vw, 60px);
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 0.78rem; font-weight: 600;
+    color: var(--gray-500); text-transform: uppercase;
+    letter-spacing: 0.06em; margin-right: 4px; white-space: nowrap;
+  }
+  .filter-btn {
+    background: var(--gray-50);
+    border: 1.5px solid var(--gray-100);
+    border-radius: 100px;
+    padding: 7px 16px;
+    font-size: 0.82rem; font-weight: 500;
+    color: var(--gray-700); cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .filter-btn:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: var(--green-soft);
+  }
+  .filter-btn.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 1100px; margin: 0 auto;
+    padding: 44px clamp(16px, 5vw, 60px) 80px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 12px; margin-bottom: 28px;
+  }
+  .section-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--white);
+  }
+  .count-badge {
+    background: var(--green);
+    color: var(--black);
+    font-size: 0.75rem; font-weight: 700;
+    border-radius: 100px; padding: 2px 10px;
+    font-family: 'Sora', sans-serif;
+  }
+
+  /* ── GRID ── */
+  .jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 20px;
+  }
+
+  /* ── CARD ── */
+  .job-card {
+    background: var(--black-card);
+    border: 1.5px solid var(--gray-100);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    display: flex; flex-direction: column;
+    gap: 0;
+    transition: all 0.22s ease;
+    cursor: pointer;
+    position: relative; overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    animation: fadeUp 0.4s ease both;
+  }
+  .job-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--green);
+    opacity: 0; transition: opacity 0.22s;
+  }
+  .job-card:hover {
+    border-color: rgba(160,213,133,0.35);
+    box-shadow: 0 8px 32px rgba(160,213,133,0.08);
+    transform: translateY(-3px);
+  }
+  .job-card:hover::before { opacity: 1; }
+
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+  .card-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .card-priority {
+    font-size: 0.7rem; font-weight: 600;
+    border-radius: 100px; padding: 3px 10px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .priority-high { background: rgba(192,57,43,0.2); color: #FF6B6B; border: 1px solid rgba(192,57,43,0.3); }
+  .priority-med  { background: rgba(160,213,133,0.15); color: var(--green); border: 1px solid rgba(160,213,133,0.25); }
+  .priority-low  { background: rgba(26,122,74,0.2); color: #4CAF82; border: 1px solid rgba(26,122,74,0.3); }
+
+  .card-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.02rem; font-weight: 600;
+    color: var(--white); line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .card-area {
+    font-size: 0.8rem; font-weight: 500;
+    color: var(--green); text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 14px;
+  }
+  .card-tags {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px;
+  }
+  .tag {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.76rem; color: var(--gray-700);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .tag svg { width: 11px; height: 11px; opacity: 0.6; }
+
+  .card-divider {
+    border: none; border-top: 1px solid var(--gray-100);
+    margin: 0 0 16px;
+  }
+  .card-desc {
+    font-size: 0.84rem; color: var(--gray-500);
+    line-height: 1.6; flex: 1; margin-bottom: 20px;
+  }
+  .btn-apply {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--green);
+    color: var(--black);
+    border: none; border-radius: 10px;
+    padding: 13px 20px;
+    font-size: 0.88rem; font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.18s ease;
+    margin-top: auto;
+  }
+  .btn-apply:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(160,213,133,0.25);
+  }
+  .btn-apply svg { width: 15px; height: 15px; transition: transform 0.18s; }
+  .btn-apply:hover svg { transform: translateX(3px); }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    grid-column: 1/-1;
+    text-align: center; padding: 60px 20px;
+    color: var(--gray-500);
+  }
+  .empty-state svg { margin-bottom: 12px; opacity: 0.4; }
+  .empty-state p { font-size: 0.95rem; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--black-card);
+    border: 1px solid var(--gray-100);
+    border-radius: 20px;
+    max-width: 580px; width: 100%;
+    max-height: 90vh; overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: modalIn 0.25s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .modal-icon { font-size: 2rem; }
+  .modal-header-text { flex: 1; }
+  .modal-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--white); margin-bottom: 4px;
+  }
+  .modal-area { font-size: 0.82rem; color: var(--green); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+  .modal-close {
+    background: var(--gray-50); border: none; border-radius: 50%;
+    width: 36px; height: 36px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gray-500); font-size: 1.2rem;
+    transition: all 0.15s;
+  }
+  .modal-close:hover { background: var(--gray-100); color: var(--white); }
+  .modal-body { padding: 24px 28px; }
+  .modal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .modal-section-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--gray-500); margin-bottom: 10px;
+  }
+  .modal-desc { font-size: 0.9rem; color: var(--gray-700); line-height: 1.7; margin-bottom: 24px; }
+  .modal-list { list-style: none; margin-bottom: 24px; }
+  .modal-list li {
+    font-size: 0.88rem; color: var(--gray-700); padding: 5px 0;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .modal-list li::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green); margin-top: 8px; flex-shrink: 0;
+  }
+  .btn-apply-full {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--green);
+    color: var(--black); text-decoration: none;
+    border-radius: 12px; padding: 16px 24px;
+    font-size: 0.95rem; font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(160,213,133,0.20);
+  }
+  .btn-apply-full:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(160,213,133,0.25);
+  }
+
+  /* ── STEP INDICATOR ── */
+  .modal-steps {
+    display: flex; align-items: center;
+    padding: 14px 28px;
+    border-bottom: 1px solid var(--gray-100);
+    gap: 0;
+    background: var(--black-mid);
+  }
+  .step-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--gray-500);
+    transition: color 0.2s;
+  }
+  .step-item.active { color: var(--white); }
+  .step-dot {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--gray-100);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+    color: var(--gray-500);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .step-item.active .step-dot {
+    background: var(--green);
+    color: var(--black);
+  }
+  .step-item.done .step-dot {
+    background: var(--green);
+    color: var(--black);
+  }
+  .step-item.done { color: var(--gray-700); }
+  .step-connector {
+    flex: 1; height: 1px;
+    background: var(--gray-100);
+    margin: 0 12px;
+  }
+
+  /* ── FORM BACK BUTTON ── */
+  .form-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.8rem; color: var(--gray-500);
+    cursor: pointer; margin-bottom: 16px;
+    transition: color 0.15s;
+  }
+  .form-back:hover { color: var(--green); }
+
+  /* ── TALLY EMBED ── */
+  .modal-form-step { padding-bottom: 20px !important; }
+  .tally-wrapper { position: relative; min-height: 120px; }
+  .tally-loading {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 14px; padding: 48px 0;
+    color: var(--gray-500); font-size: 0.85rem;
+  }
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid var(--gray-100);
+    border-top-color: var(--green);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black-mid);
+    border-top: 1px solid var(--gray-100);
+    text-align: center; padding: 28px 20px;
+  }
+  footer p {
+    font-size: 0.82rem; color: var(--gray-500);
+  }
+  footer strong { color: var(--gray-700); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .job-card:nth-child(1) { animation-delay: 0.05s; }
+  .job-card:nth-child(2) { animation-delay: 0.10s; }
+  .job-card:nth-child(3) { animation-delay: 0.15s; }
+  .job-card:nth-child(4) { animation-delay: 0.20s; }
+  .job-card:nth-child(5) { animation-delay: 0.25s; }
+  .job-card:nth-child(6) { animation-delay: 0.30s; }
+  .job-card:nth-child(7) { animation-delay: 0.35s; }
+  .job-card:nth-child(8) { animation-delay: 0.40s; }
+  .job-card:nth-child(9) { animation-delay: 0.45s; }
+  .job-card:nth-child(10){ animation-delay: 0.50s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero-stats { gap: 20px; }
+    .filters-inner { gap: 8px; }
+    .modal { border-radius: 16px; }
+    .modal-header, .modal-body { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">3778 <span>Saúde</span></div>
+  <a href="#vagas" class="nav-link">Ver vagas abertas</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Vagas abertas agora</div>
+    <h1>Construa o futuro<br>da <em>saúde digital</em><br>com a gente</h1>
+    <p class="hero-sub">Somos uma healthtech que usa tecnologia e dados para transformar a saúde no Brasil. Buscamos pessoas que queiram ter impacto real.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num" id="open-count">10</span>
+        <span class="stat-label">Vagas abertas</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Gratuito candidatar</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">~48h</span>
+        <span class="stat-label">Retorno inicial</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="filters-bar" id="vagas">
+  <div class="filters-inner">
+    <span class="filter-label">Filtrar:</span>
+    <button class="filter-btn active" onclick="filterJobs('Todas', this)">Todas</button>
+    <button class="filter-btn" onclick="filterJobs('Tecnologia', this)">Tecnologia</button>
+    <button class="filter-btn" onclick="filterJobs('Dados', this)">Dados</button>
+    <button class="filter-btn" onclick="filterJobs('Saúde', this)">Saúde</button>
+    <button class="filter-btn" onclick="filterJobs('Produto', this)">Produto</button>
+    <button class="filter-btn" onclick="filterJobs('Operações', this)">Operações</button>
+    <button class="filter-btn" onclick="filterJobs('RH', this)">RH</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="section-header">
+    <span class="section-title">Oportunidades em aberto</span>
+    <span class="count-badge" id="visible-count">10 vagas</span>
+  </div>
+
+  <div class="jobs-grid" id="jobs-grid"></div>
+</main>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+
+    <!-- CABEÇALHO PERSISTENTE -->
+    <div class="modal-header">
+      <div class="modal-icon" id="modal-icon"></div>
+      <div class="modal-header-text">
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-area" id="modal-area"></div>
+      </div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+
+    <!-- INDICADOR DE ETAPAS -->
+    <div class="modal-steps" id="modal-steps">
+      <div class="step-item active" id="step1-indicator">
+        <div class="step-dot">1</div>
+        <span>Detalhes da vaga</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" id="step2-indicator">
+        <div class="step-dot">2</div>
+        <span>Candidatura</span>
+      </div>
+    </div>
+
+    <!-- ETAPA 1: DETALHES -->
+    <div class="modal-body" id="modal-step1">
+      <div class="modal-tags" id="modal-tags"></div>
+      <div class="modal-section-title">Sobre a vaga</div>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-section-title">O que buscamos</div>
+      <ul class="modal-list" id="modal-reqs"></ul>
+      <button class="btn-apply-full" onclick="goToForm()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Quero me candidatar
+      </button>
+    </div>
+
+    <!-- ETAPA 2: FORMULÁRIO TALLY EMBUTIDO -->
+    <div class="modal-body modal-form-step" id="modal-step2" style="display:none;">
+      <div class="form-back" onclick="goToDetails()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar aos detalhes
+      </div>
+      <div class="tally-wrapper" id="tally-wrapper">
+        <div class="tally-loading" id="tally-loading">
+          <div class="spinner"></div>
+          <p>Carregando formulário…</p>
+        </div>
+        <iframe
+          id="tally-iframe"
+          src=""
+          width="100%"
+          height="520"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          style="display:none; border-radius:10px;"
+          title="Formulário de candidatura"
+          onload="onIframeLoad()"
+        ></iframe>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p><strong>3778 Saúde</strong> · Dúvidas? Entre em contato pelo LinkedIn ou e-mail institucional.</p>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// CONFIGURAÇÃO: substitua pelo ID do seu formulário Tally
+// O link do Tally tem formato: tally.so/r/XXXXXX
+// Coloque apenas o ID (ex: "wMd3kP"), não a URL completa
+// ─────────────────────────────────────────────────────────────
+const TALLY_ID   = "SUBSTITUA-PELO-ID-DO-TALLY"; // ex: "wMd3kP"
+const TALLY_BASE = `https://tally.so/r/${TALLY_ID}`;
+
+const jobs = [
+  {
+    id: 1, area: "Tecnologia", icon: "⚙️", iconBg: "var(--green-soft)",
+    title: "Engenheiro(a) de Software Sênior",
+    model: "CLT", location: "Remoto", priority: "high", priorityLabel: "Urgente",
+    desc: "Atue no desenvolvimento de plataformas de saúde de alta escala, colaborando com times multidisciplinares para entregar soluções que impactam milhões de pacientes.",
+    reqs: ["5+ anos com desenvolvimento backend (Python, Go ou Node)", "Experiência com arquitetura de microsserviços e cloud (AWS/GCP)", "Familiaridade com sistemas de saúde ou dados sensíveis é diferencial"],
+    formUrl: `${TALLY_BASE}?cargo=Engenheiro(a) de Software Sênior`
+  },
+  {
+    id: 2, area: "Dados", icon: "📊", iconBg: "rgba(160,213,133,0.10)",
+    title: "Cientista de Dados",
+    model: "CLT / PJ", location: "Híbrido – SP", priority: "high", priorityLabel: "Urgente",
+    desc: "Desenvolva modelos preditivos e análises que orientam decisões clínicas e operacionais, transformando grandes volumes de dados em insights acionáveis.",
+    reqs: ["Sólida experiência com Python, SQL e ferramentas de ML (scikit-learn, XGBoost)", "Experiência com dados clínicos ou de saúde é um grande diferencial", "Capacidade de comunicar resultados para públicos não técnicos"],
+    formUrl: `${TALLY_BASE}?cargo=Cientista de Dados`
+  },
+  {
+    id: 3, area: "Produto", icon: "🎯", iconBg: "rgba(160,213,133,0.11)",
+    title: "Product Manager",
+    model: "CLT", location: "São Paulo – SP", priority: "high", priorityLabel: "Urgente",
+    desc: "Lidere a visão e o roadmap de produto, conectando necessidades dos usuários, objetivos de negócio e capacidades técnicas para criar produtos de saúde com impacto real.",
+    reqs: ["3+ anos de experiência como PM em produtos digitais", "Forte orientação a dados e experiência com metodologias ágeis", "Experiência em healthtech ou produtos B2B é valorizada"],
+    formUrl: `${TALLY_BASE}?cargo=Product Manager`
+  },
+  {
+    id: 4, area: "Tecnologia", icon: "🎨", iconBg: "var(--green-soft)",
+    title: "Designer de Produto (UX/UI)",
+    model: "CLT", location: "Remoto", priority: "med", priorityLabel: "Alta",
+    desc: "Projete experiências intuitivas e acessíveis para profissionais de saúde e pacientes, desde pesquisas com usuários até protótipos validados em produção.",
+    reqs: ["Portfólio sólido com cases de produtos digitais complexos", "Domínio de Figma e Design System", "Experiência com pesquisa qualitativa e testes de usabilidade"],
+    formUrl: `${TALLY_BASE}?cargo=Designer de Produto`
+  },
+  {
+    id: 5, area: "Saúde", icon: "🩺", iconBg: "rgba(160,213,133,0.09)",
+    title: "Especialista em Operações de Saúde",
+    model: "CLT", location: "São Paulo – SP", priority: "high", priorityLabel: "Urgente",
+    desc: "Gerencie e otimize operações clínicas, garantindo qualidade assistencial, conformidade regulatória e eficiência em processos de saúde.",
+    reqs: ["Formação em área de saúde (medicina, enfermagem, farmácia ou correlatas)", "Experiência em gestão de operações em saúde ou healthtech", "Conhecimento de regulamentações ANS/CFM/ANVISA"],
+    formUrl: `${TALLY_BASE}?cargo=Especialista em Operações de Saúde`
+  },
+  {
+    id: 6, area: "Dados", icon: "🔬", iconBg: "rgba(160,213,133,0.10)",
+    title: "Engenheiro(a) de Dados",
+    model: "CLT / PJ", location: "Remoto", priority: "high", priorityLabel: "Urgente",
+    desc: "Construa e mantenha pipelines de dados robustos, garantindo que informações de saúde estejam disponíveis, confiáveis e prontas para análise em tempo real.",
+    reqs: ["Experiência com Airflow, Spark ou ferramentas similares de orquestração", "Domínio de SQL avançado e data warehouses (BigQuery, Redshift, Snowflake)", "Experiência com dados de saúde (HL7, FHIR) é diferencial"],
+    formUrl: `${TALLY_BASE}?cargo=Engenheiro(a) de Dados`
+  },
+  {
+    id: 7, area: "Operações", icon: "📋", iconBg: "rgba(255,107,107,0.12)",
+    title: "Analista de Operações",
+    model: "CLT", location: "São Paulo – SP", priority: "med", priorityLabel: "Alta",
+    desc: "Apoie processos internos de ponta a ponta, mapeando fluxos, identificando gargalos e implementando melhorias que aumentem a eficiência operacional da empresa.",
+    reqs: ["Experiência em análise de processos e gestão operacional", "Boa lógica analítica e domínio de planilhas e ferramentas de dados", "Perfil comunicativo e orientado a resultados"],
+    formUrl: `${TALLY_BASE}?cargo=Analista de Operações`
+  },
+  {
+    id: 8, area: "Tecnologia", icon: "🔐", iconBg: "var(--green-soft)",
+    title: "Engenheiro(a) de Segurança",
+    model: "CLT", location: "Remoto", priority: "med", priorityLabel: "Alta",
+    desc: "Proteja dados sensíveis de saúde e garanta a conformidade com LGPD e padrões internacionais de segurança, desenvolvendo políticas e implementando controles técnicos.",
+    reqs: ["Experiência com segurança em cloud e aplicações web", "Conhecimento de frameworks: LGPD, ISO 27001, SOC 2", "Vivência com pentest, SIEM ou resposta a incidentes é diferencial"],
+    formUrl: `${TALLY_BASE}?cargo=Engenheiro(a) de Segurança`
+  },
+  {
+    id: 9, area: "RH", icon: "🤝", iconBg: "rgba(160,213,133,0.11)",
+    title: "People Partner (HRBP)",
+    model: "CLT", location: "Híbrido – SP", priority: "low", priorityLabel: "Aberta",
+    desc: "Seja o elo estratégico entre o time de pessoas e as áreas de negócio, apoiando líderes em desenvolvimento de time, cultura, performance e gestão de mudança.",
+    reqs: ["3+ anos de experiência como HRBP ou gestão de pessoas em empresas de tecnologia", "Visão estratégica aliada à execução no dia a dia", "Experiência em ambientes de alto crescimento é valorizada"],
+    formUrl: `${TALLY_BASE}?cargo=People Partner (HRBP)`
+  },
+  {
+    id: 10, area: "Produto", icon: "📱", iconBg: "rgba(160,213,133,0.11)",
+    title: "Analista de Produto (APM)",
+    model: "CLT", location: "Remoto", priority: "low", priorityLabel: "Aberta",
+    desc: "Apoie o ciclo de desenvolvimento de produtos digitais de saúde: análise de dados, escrita de requisitos, acompanhamento de sprints e validação com usuários.",
+    reqs: ["1–3 anos de experiência em produto digital ou áreas correlatas (análise, design ou engenharia)", "Curiosidade genuína por dados e experiência do usuário", "Interesse por saúde digital é um grande diferencial"],
+    formUrl: `${TALLY_BASE}?cargo=Analista de Produto (APM)`
+  },
+];
+
+let currentFilter = "Todas";
+
+function priorityClass(p) {
+  if (p === "high") return "priority-high";
+  if (p === "med")  return "priority-med";
+  return "priority-low";
+}
+
+function tagHTML(icon, text) {
+  return `<span class="tag">${icon} ${text}</span>`;
+}
+
+function renderCard(job) {
+  return `
+    <div class="job-card" data-area="${job.area}" onclick="openModal(${job.id})">
+      <div class="card-top">
+        <div class="card-icon" style="background:${job.iconBg}">${job.icon}</div>
+        <span class="card-priority ${priorityClass(job.priority)}">${job.priorityLabel}</span>
+      </div>
+      <div class="card-area">${job.area}</div>
+      <div class="card-title">${job.title}</div>
+      <div class="card-tags">
+        ${tagHTML("📍", job.location)}
+        ${tagHTML("💼", job.model)}
+      </div>
+      <hr class="card-divider">
+      <p class="card-desc">${job.desc.slice(0, 100)}…</p>
+      <button class="btn-apply">
+        Ver vaga e candidatar-se
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  `;
+}
+
+function renderGrid(filter) {
+  const grid = document.getElementById("jobs-grid");
+  const filtered = filter === "Todas" ? jobs : jobs.filter(j => j.area === filter);
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="empty-state">
+      <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <p>Nenhuma vaga encontrada para esta área no momento.</p>
+    </div>`;
+  } else {
+    grid.innerHTML = filtered.map(renderCard).join("");
+  }
+  const countEl = document.getElementById("visible-count");
+  countEl.textContent = filtered.length === 1 ? "1 vaga" : `${filtered.length} vagas`;
+}
+
+function filterJobs(area, btn) {
+  currentFilter = area;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderGrid(area);
+}
+
+let currentJobUrl = "";
+
+function openModal(id) {
+  const job = jobs.find(j => j.id === id);
+  currentJobUrl = job.formUrl;
+
+  document.getElementById("modal-icon").textContent  = job.icon;
+  document.getElementById("modal-title").textContent = job.title;
+  document.getElementById("modal-area").textContent  = job.area + " · " + job.location + " · " + job.model;
+  document.getElementById("modal-tags").innerHTML =
+    tagHTML("📍", job.location) + tagHTML("💼", job.model) + tagHTML("🚦", job.priorityLabel);
+  document.getElementById("modal-desc").textContent  = job.desc;
+  document.getElementById("modal-reqs").innerHTML = job.reqs.map(r => `<li>${r}</li>`).join("");
+
+  // Reset para etapa 1
+  showStep(1);
+
+  document.getElementById("modal-overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function showStep(n) {
+  const step1 = document.getElementById("modal-step1");
+  const step2 = document.getElementById("modal-step2");
+  const ind1  = document.getElementById("step1-indicator");
+  const ind2  = document.getElementById("step2-indicator");
+
+  if (n === 1) {
+    step1.style.display = "block";
+    step2.style.display = "none";
+    ind1.classList.add("active");    ind1.classList.remove("done");
+    ind2.classList.remove("active"); ind2.classList.remove("done");
+    // Limpa iframe ao voltar
+    document.getElementById("tally-iframe").src = "";
+    document.getElementById("tally-iframe").style.display = "none";
+    document.getElementById("tally-loading").style.display = "flex";
+  } else {
+    step1.style.display = "none";
+    step2.style.display = "block";
+    ind1.classList.remove("active"); ind1.classList.add("done");
+    ind2.classList.add("active");
+    // Carrega o iframe com a URL do Tally (parâmetro &transparente para embed)
+    const embedUrl = currentJobUrl.replace("tally.so/r/", "tally.so/embed/") + "&hideTitle=1&transparentBackground=1&dynamicHeight=1";
+    document.getElementById("tally-iframe").src = embedUrl;
+    // Scroll modal ao topo
+    document.getElementById("modal-box").scrollTop = 0;
+  }
+}
+
+function goToForm()    { showStep(2); }
+function goToDetails() { showStep(1); }
+
+function onIframeLoad() {
+  document.getElementById("tally-loading").style.display = "none";
+  document.getElementById("tally-iframe").style.display  = "block";
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById("modal-overlay")) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById("modal-overlay").classList.remove("open");
+  document.body.style.overflow = "";
+  // Reset iframe para não manter formulário preenchido
+  setTimeout(() => {
+    document.getElementById("tally-iframe").src = "";
+    document.getElementById("tally-iframe").style.display = "none";
+    document.getElementById("tally-loading").style.display = "flex";
+  }, 300);
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModalDirect(); });
+
+// Init
+renderGrid("Todas");
+document.getElementById("open-count").textContent = jobs.length;
+</script>
+</body>
+</html>
