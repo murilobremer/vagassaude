@@ -522,12 +522,8 @@
   <div class="filters-inner">
     <span class="filter-label">Filtrar:</span>
     <button class="filter-btn active" onclick="filterJobs('Todas', this)">Todas</button>
-    <button class="filter-btn" onclick="filterJobs('Tecnologia', this)">Tecnologia</button>
-    <button class="filter-btn" onclick="filterJobs('Dados', this)">Dados</button>
-    <button class="filter-btn" onclick="filterJobs('Saúde', this)">Saúde</button>
-    <button class="filter-btn" onclick="filterJobs('Produto', this)">Produto</button>
-    <button class="filter-btn" onclick="filterJobs('Operações', this)">Operações</button>
-    <button class="filter-btn" onclick="filterJobs('RH', this)">RH</button>
+    <button class="filter-btn" onclick="filterJobs('Saúde Ocupacional', this)">Saúde Ocupacional</button>
+    <button class="filter-btn" onclick="filterJobs('_urgente', this)">🔴 Urgentes</button>
   </div>
 </div>
 
@@ -620,89 +616,74 @@
 // O link do Tally tem formato: tally.so/r/XXXXXX
 // Coloque apenas o ID (ex: "wMd3kP"), não a URL completa
 // ─────────────────────────────────────────────────────────────
-const TALLY_ID   = "0QMy2N"; // ex: "wMd3kP"
+const TALLY_ID   = "0QMy2N";
 const TALLY_BASE = `https://tally.so/r/${TALLY_ID}`;
 
 const jobs = [
   {
-    id: 1, area: "Tecnologia", icon: "⚙️", iconBg: "var(--green-soft)",
-    title: "Engenheiro(a) de Software Sênior",
-    model: "CLT", location: "Remoto", priority: "high", priorityLabel: "Urgente",
-    desc: "Atue no desenvolvimento de plataformas de saúde de alta escala, colaborando com times multidisciplinares para entregar soluções que impactam milhões de pacientes.",
-    reqs: ["5+ anos com desenvolvimento backend (Python, Go ou Node)", "Experiência com arquitetura de microsserviços e cloud (AWS/GCP)", "Familiaridade com sistemas de saúde ou dados sensíveis é diferencial"],
-    formUrl: `${TALLY_BASE}?cargo=Engenheiro(a) de Software Sênior`
+    id: 1, area: "Saúde Ocupacional", icon: "🩺", iconBg: "rgba(160,213,133,0.10)",
+    title: "Enfermeiro(a) do Trabalho",
+    model: "CLT", location: "Belo Horizonte – MG", priority: "high", priorityLabel: "Urgente",
+    desc: "Atue na promoção e vigilância da saúde dos trabalhadores em Belo Horizonte, realizando ações preventivas, educativas e assistenciais no ambiente ocupacional.",
+    reqs: [
+      "Graduação em Enfermagem com especialização em Enfermagem do Trabalho",
+      "Registro ativo no COREN e CNST",
+      "Experiência em PCMSO, campanhas de saúde e atendimento ambulatorial",
+      "Conhecimento das NRs, especialmente NR-7 e NR-32",
+    ],
+    formUrl: `${TALLY_BASE}?cargo=Enfermeiro(a) do Trabalho - BH/MG`
   },
   {
-    id: 2, area: "Dados", icon: "📊", iconBg: "rgba(160,213,133,0.10)",
-    title: "Cientista de Dados",
-    model: "CLT / PJ", location: "Híbrido – SP", priority: "high", priorityLabel: "Urgente",
-    desc: "Desenvolva modelos preditivos e análises que orientam decisões clínicas e operacionais, transformando grandes volumes de dados em insights acionáveis.",
-    reqs: ["Sólida experiência com Python, SQL e ferramentas de ML (scikit-learn, XGBoost)", "Experiência com dados clínicos ou de saúde é um grande diferencial", "Capacidade de comunicar resultados para públicos não técnicos"],
-    formUrl: `${TALLY_BASE}?cargo=Cientista de Dados`
+    id: 2, area: "Saúde Ocupacional", icon: "👨‍⚕️", iconBg: "rgba(160,213,133,0.09)",
+    title: "Médico(a) do Trabalho – Especialista RQE",
+    model: "CLT", location: "Camaçari – BA", priority: "high", priorityLabel: "Urgente",
+    desc: "Responsável pela coordenação e execução do PCMSO, realização de exames ocupacionais e ações de vigilância em saúde para colaboradores em Camaçari.",
+    reqs: [
+      "CRM ativo com RQE em Medicina do Trabalho",
+      "Experiência em coordenação de PCMSO em indústrias ou grandes empresas",
+      "Familiaridade com laudos periciais, ASO e gestão de afastamentos",
+      "Conhecimento das NRs e legislação previdenciária aplicável",
+    ],
+    formUrl: `${TALLY_BASE}?cargo=Médico(a) do Trabalho RQE - Camaçari/BA`
   },
   {
-    id: 3, area: "Produto", icon: "🎯", iconBg: "rgba(160,213,133,0.11)",
-    title: "Product Manager",
-    model: "CLT", location: "São Paulo – SP", priority: "high", priorityLabel: "Urgente",
-    desc: "Lidere a visão e o roadmap de produto, conectando necessidades dos usuários, objetivos de negócio e capacidades técnicas para criar produtos de saúde com impacto real.",
-    reqs: ["3+ anos de experiência como PM em produtos digitais", "Forte orientação a dados e experiência com metodologias ágeis", "Experiência em healthtech ou produtos B2B é valorizada"],
-    formUrl: `${TALLY_BASE}?cargo=Product Manager`
+    id: 3, area: "Saúde Ocupacional", icon: "👩‍⚕️", iconBg: "rgba(160,213,133,0.11)",
+    title: "Médico(a) do Trabalho – RQE",
+    model: "CLT", location: "Rio de Janeiro – RJ", priority: "high", priorityLabel: "Urgente",
+    desc: "Atuação em saúde ocupacional com foco na elaboração e execução do PCMSO, realização de exames admissionais, periódicos e demissionais no Rio de Janeiro.",
+    reqs: [
+      "CRM ativo com RQE em Medicina do Trabalho",
+      "Experiência comprovada em medicina ocupacional",
+      "Habilidade para emissão de ASO e condução de perícias internas",
+      "Perfil proativo e orientado à saúde preventiva do trabalhador",
+    ],
+    formUrl: `${TALLY_BASE}?cargo=Médico(a) do Trabalho RQE - Rio de Janeiro/RJ`
   },
   {
-    id: 4, area: "Tecnologia", icon: "🎨", iconBg: "var(--green-soft)",
-    title: "Designer de Produto (UX/UI)",
-    model: "CLT", location: "Remoto", priority: "med", priorityLabel: "Alta",
-    desc: "Projete experiências intuitivas e acessíveis para profissionais de saúde e pacientes, desde pesquisas com usuários até protótipos validados em produção.",
-    reqs: ["Portfólio sólido com cases de produtos digitais complexos", "Domínio de Figma e Design System", "Experiência com pesquisa qualitativa e testes de usabilidade"],
-    formUrl: `${TALLY_BASE}?cargo=Designer de Produto`
+    id: 4, area: "Saúde Ocupacional", icon: "🏥", iconBg: "rgba(160,213,133,0.10)",
+    title: "Médico(a) do Trabalho",
+    model: "CLT", location: "Rondonópolis – MT", priority: "med", priorityLabel: "Alta",
+    desc: "Execução das atividades de medicina ocupacional junto a empresas clientes em Rondonópolis, incluindo exames periódicos, PCMSO e ações de promoção à saúde.",
+    reqs: [
+      "CRM ativo — RQE em Medicina do Trabalho é diferencial",
+      "Experiência em saúde ocupacional e emissão de ASO",
+      "Disponibilidade para atendimento em empresas clientes na região",
+      "Boa comunicação e capacidade de trabalho em equipe multidisciplinar",
+    ],
+    formUrl: `${TALLY_BASE}?cargo=Médico(a) do Trabalho - Rondonópolis/MT`
   },
   {
-    id: 5, area: "Saúde", icon: "🩺", iconBg: "rgba(160,213,133,0.09)",
-    title: "Especialista em Operações de Saúde",
-    model: "CLT", location: "São Paulo – SP", priority: "high", priorityLabel: "Urgente",
-    desc: "Gerencie e otimize operações clínicas, garantindo qualidade assistencial, conformidade regulatória e eficiência em processos de saúde.",
-    reqs: ["Formação em área de saúde (medicina, enfermagem, farmácia ou correlatas)", "Experiência em gestão de operações em saúde ou healthtech", "Conhecimento de regulamentações ANS/CFM/ANVISA"],
-    formUrl: `${TALLY_BASE}?cargo=Especialista em Operações de Saúde`
-  },
-  {
-    id: 6, area: "Dados", icon: "🔬", iconBg: "rgba(160,213,133,0.10)",
-    title: "Engenheiro(a) de Dados",
-    model: "CLT / PJ", location: "Remoto", priority: "high", priorityLabel: "Urgente",
-    desc: "Construa e mantenha pipelines de dados robustos, garantindo que informações de saúde estejam disponíveis, confiáveis e prontas para análise em tempo real.",
-    reqs: ["Experiência com Airflow, Spark ou ferramentas similares de orquestração", "Domínio de SQL avançado e data warehouses (BigQuery, Redshift, Snowflake)", "Experiência com dados de saúde (HL7, FHIR) é diferencial"],
-    formUrl: `${TALLY_BASE}?cargo=Engenheiro(a) de Dados`
-  },
-  {
-    id: 7, area: "Operações", icon: "📋", iconBg: "rgba(255,107,107,0.12)",
-    title: "Analista de Operações",
-    model: "CLT", location: "São Paulo – SP", priority: "med", priorityLabel: "Alta",
-    desc: "Apoie processos internos de ponta a ponta, mapeando fluxos, identificando gargalos e implementando melhorias que aumentem a eficiência operacional da empresa.",
-    reqs: ["Experiência em análise de processos e gestão operacional", "Boa lógica analítica e domínio de planilhas e ferramentas de dados", "Perfil comunicativo e orientado a resultados"],
-    formUrl: `${TALLY_BASE}?cargo=Analista de Operações`
-  },
-  {
-    id: 8, area: "Tecnologia", icon: "🔐", iconBg: "var(--green-soft)",
-    title: "Engenheiro(a) de Segurança",
-    model: "CLT", location: "Remoto", priority: "med", priorityLabel: "Alta",
-    desc: "Proteja dados sensíveis de saúde e garanta a conformidade com LGPD e padrões internacionais de segurança, desenvolvendo políticas e implementando controles técnicos.",
-    reqs: ["Experiência com segurança em cloud e aplicações web", "Conhecimento de frameworks: LGPD, ISO 27001, SOC 2", "Vivência com pentest, SIEM ou resposta a incidentes é diferencial"],
-    formUrl: `${TALLY_BASE}?cargo=Engenheiro(a) de Segurança`
-  },
-  {
-    id: 9, area: "RH", icon: "🤝", iconBg: "rgba(160,213,133,0.11)",
-    title: "People Partner (HRBP)",
-    model: "CLT", location: "Híbrido – SP", priority: "low", priorityLabel: "Aberta",
-    desc: "Seja o elo estratégico entre o time de pessoas e as áreas de negócio, apoiando líderes em desenvolvimento de time, cultura, performance e gestão de mudança.",
-    reqs: ["3+ anos de experiência como HRBP ou gestão de pessoas em empresas de tecnologia", "Visão estratégica aliada à execução no dia a dia", "Experiência em ambientes de alto crescimento é valorizada"],
-    formUrl: `${TALLY_BASE}?cargo=People Partner (HRBP)`
-  },
-  {
-    id: 10, area: "Produto", icon: "📱", iconBg: "rgba(160,213,133,0.11)",
-    title: "Analista de Produto (APM)",
-    model: "CLT", location: "Remoto", priority: "low", priorityLabel: "Aberta",
-    desc: "Apoie o ciclo de desenvolvimento de produtos digitais de saúde: análise de dados, escrita de requisitos, acompanhamento de sprints e validação com usuários.",
-    reqs: ["1–3 anos de experiência em produto digital ou áreas correlatas (análise, design ou engenharia)", "Curiosidade genuína por dados e experiência do usuário", "Interesse por saúde digital é um grande diferencial"],
-    formUrl: `${TALLY_BASE}?cargo=Analista de Produto (APM)`
+    id: 5, area: "Saúde Ocupacional", icon: "⚕️", iconBg: "rgba(160,213,133,0.09)",
+    title: "Médico(a) do Trabalho",
+    model: "CLT", location: "Paranaguá – PR", priority: "med", priorityLabel: "Alta",
+    desc: "Atuação em saúde ocupacional no Porto de Paranaguá e empresas da região, realizando exames, elaborando laudos e promovendo a saúde dos trabalhadores.",
+    reqs: [
+      "CRM ativo — RQE em Medicina do Trabalho é diferencial",
+      "Experiência em ambientes industriais ou portuários é valorizada",
+      "Conhecimento das NRs aplicadas a atividades de risco",
+      "Perfil resolutivo e comprometido com a saúde preventiva",
+    ],
+    formUrl: `${TALLY_BASE}?cargo=Médico(a) do Trabalho - Paranaguá/PR`
   },
 ];
 
@@ -743,7 +724,11 @@ function renderCard(job) {
 
 function renderGrid(filter) {
   const grid = document.getElementById("jobs-grid");
-  const filtered = filter === "Todas" ? jobs : jobs.filter(j => j.area === filter);
+  let filtered;
+  if (filter === "Todas") filtered = jobs;
+  else if (filter === "_urgente") filtered = jobs.filter(j => j.priority === "high");
+  else filtered = jobs.filter(j => j.area === filter);
+
   if (filtered.length === 0) {
     grid.innerHTML = `<div class="empty-state">
       <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
