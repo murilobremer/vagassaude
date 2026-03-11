@@ -452,25 +452,26 @@
 
   .form-submitted-bar {
     display: flex; align-items: center; justify-content: space-between;
-    margin-top: 12px;
-    background: var(--black-mid);
-    border: 1px solid var(--gray-100);
+    margin-top: 14px;
+    background: rgba(160,213,133,0.08);
+    border: 1.5px solid rgba(160,213,133,0.3);
     border-radius: 10px;
-    padding: 12px 16px;
+    padding: 13px 16px;
     gap: 12px;
   }
   .form-submitted-bar span {
-    font-size: 0.82rem; color: var(--gray-500);
+    font-size: 0.83rem; color: var(--gray-500);
   }
   .form-submitted-bar button {
     background: var(--green);
     color: var(--black);
     border: none; border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 0.82rem; font-weight: 700;
+    padding: 9px 18px;
+    font-size: 0.83rem; font-weight: 700;
     font-family: 'DM Sans', sans-serif;
     cursor: pointer; white-space: nowrap;
     transition: background 0.18s;
+    flex-shrink: 0;
   }
   .form-submitted-bar button:hover { background: var(--green-dark); color: #fff; }
 
@@ -664,7 +665,7 @@
           id="tally-iframe"
           src=""
           width="100%"
-          height="520"
+          height="460"
           frameborder="0"
           marginheight="0"
           marginwidth="0"
@@ -672,13 +673,12 @@
           title="Formulário de candidatura"
           onload="onIframeLoad()"
         ></iframe>
-        <!-- Botão de fallback: aparece após carregar o formulário -->
-        <div class="form-submitted-bar" id="form-submitted-bar" style="display:none;">
-          <span>Formulário enviado?</span>
-          <button onclick="showStep(3)">
-            Ver próximo passo →
-          </button>
-        </div>
+      </div>
+      <!-- Barra de confirmação — fora do scroll, sempre visível -->
+      <div class="form-submitted-bar" id="form-submitted-bar" style="display:none;">
+        <span>Já enviou o formulário?</span>
+        <button onclick="showStep(3)">Próximo passo →</button>
+      </div>
       </div>
     </div>
 
@@ -881,6 +881,7 @@ function showStep(n) {
     document.getElementById("tally-iframe").src = "";
     document.getElementById("tally-iframe").style.display = "none";
     document.getElementById("tally-loading").style.display = "flex";
+    document.getElementById("form-submitted-bar").style.display = "none";
   } else if (n === 2) {
     step2.style.display = "block";
     ind1.classList.add("done");
@@ -917,11 +918,9 @@ function goToDetails() { showStep(1); }
 function onIframeLoad() {
   document.getElementById("tally-loading").style.display = "none";
   document.getElementById("tally-iframe").style.display  = "block";
-  // Exibe barra de fallback 3 segundos após o iframe carregar
-  setTimeout(() => {
-    const bar = document.getElementById("form-submitted-bar");
-    if (bar) bar.style.display = "flex";
-  }, 3000);
+  // Exibe barra de fallback imediatamente — sempre visível para o candidato
+  const bar = document.getElementById("form-submitted-bar");
+  if (bar) bar.style.display = "flex";
 }
 
 function closeModal(e) {
