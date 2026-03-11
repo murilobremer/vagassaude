@@ -450,6 +450,49 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* ── SUCCESS SCREEN ── */
+  .modal-success-step { text-align: center; padding: 40px 28px 32px !important; }
+  .success-icon { font-size: 3rem; margin-bottom: 16px; animation: popIn 0.4s ease; }
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+  .success-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: 12px;
+  }
+  .success-desc {
+    font-size: 0.9rem; color: var(--gray-500);
+    line-height: 1.7; max-width: 420px;
+    margin: 0 auto 28px;
+  }
+  .btn-whatsapp {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: #25D366;
+    color: #fff; text-decoration: none;
+    border-radius: 12px; padding: 15px 24px;
+    font-size: 0.95rem; font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    width: 100%; margin-bottom: 12px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.25);
+  }
+  .btn-whatsapp:hover {
+    background: #1ebe5a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+  }
+  .btn-close-success {
+    background: none; border: 1px solid var(--gray-100);
+    border-radius: 10px; padding: 11px 24px;
+    font-size: 0.85rem; color: var(--gray-500);
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer; width: 100%;
+    transition: all 0.18s;
+  }
+  .btn-close-success:hover { border-color: var(--gray-300); color: var(--white); }
+
   /* ── FOOTER ── */
   footer {
     background: var(--black-mid);
@@ -562,6 +605,11 @@
         <div class="step-dot">2</div>
         <span>Candidatura</span>
       </div>
+      <div class="step-connector"></div>
+      <div class="step-item" id="step3-indicator">
+        <div class="step-dot">3</div>
+        <span>Falar com recrutador</span>
+      </div>
     </div>
 
     <!-- ETAPA 1: DETALHES -->
@@ -603,8 +651,17 @@
       </div>
     </div>
 
-  </div>
-</div>
+    <!-- ETAPA 3: SUCESSO + WHATSAPP -->
+    <div class="modal-body modal-success-step" id="modal-step3" style="display:none;">
+      <div class="success-icon">✅</div>
+      <h3 class="success-title">Candidatura enviada!</h3>
+      <p class="success-desc">Recebemos suas informações. Agora você pode falar diretamente com o recrutador responsável pela vaga — é rápido e sem compromisso.</p>
+      <a class="btn-whatsapp" id="btn-whatsapp" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.535 5.858L.057 23.57a.75.75 0 00.918.899l5.885-1.543A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.5-5.207-1.378l-.372-.214-3.854 1.011 1.032-3.763-.234-.389A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Falar com o recrutador no WhatsApp
+      </a>
+      <button class="btn-close-success" onclick="closeModalDirect()">Fechar</button>
+    </div>
 
 <footer>
   <p><strong>3778 Saúde</strong> · Dúvidas? Entre em contato pelo LinkedIn ou e-mail institucional.</p>
@@ -616,6 +673,13 @@
 // O link do Tally tem formato: tally.so/r/XXXXXX
 // Coloque apenas o ID (ex: "wMd3kP"), não a URL completa
 // ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// CONFIGURAÇÃO: WhatsApp do recrutador
+// Formato: código do país + DDD + número (sem espaços ou traços)
+// Ex: 5531999998888
+// ─────────────────────────────────────────────────────────────
+const WHATSAPP_NUMBER = "55XXXXXXXXXXX"; // ← substitua pelo número do recrutador
+
 const TALLY_ID   = "0QMy2N";
 const TALLY_BASE = `https://tally.so/r/${TALLY_ID}`;
 
@@ -772,30 +836,46 @@ function openModal(id) {
 function showStep(n) {
   const step1 = document.getElementById("modal-step1");
   const step2 = document.getElementById("modal-step2");
+  const step3 = document.getElementById("modal-step3");
   const ind1  = document.getElementById("step1-indicator");
   const ind2  = document.getElementById("step2-indicator");
+  const ind3  = document.getElementById("step3-indicator");
+
+  [step1, step2, step3].forEach(el => el.style.display = "none");
+  [ind1, ind2, ind3].forEach(el => { el.classList.remove("active", "done"); });
 
   if (n === 1) {
     step1.style.display = "block";
-    step2.style.display = "none";
-    ind1.classList.add("active");    ind1.classList.remove("done");
-    ind2.classList.remove("active"); ind2.classList.remove("done");
-    // Limpa iframe ao voltar
+    ind1.classList.add("active");
     document.getElementById("tally-iframe").src = "";
     document.getElementById("tally-iframe").style.display = "none";
     document.getElementById("tally-loading").style.display = "flex";
-  } else {
-    step1.style.display = "none";
+  } else if (n === 2) {
     step2.style.display = "block";
-    ind1.classList.remove("active"); ind1.classList.add("done");
+    ind1.classList.add("done");
     ind2.classList.add("active");
-    // Carrega o iframe com a URL do Tally (parâmetro &transparente para embed)
     const embedUrl = currentJobUrl.replace("tally.so/r/", "tally.so/embed/") + "&hideTitle=1&transparentBackground=1&dynamicHeight=1";
     document.getElementById("tally-iframe").src = embedUrl;
-    // Scroll modal ao topo
+    document.getElementById("modal-box").scrollTop = 0;
+  } else if (n === 3) {
+    step3.style.display = "block";
+    ind1.classList.add("done");
+    ind2.classList.add("done");
+    ind3.classList.add("active");
+    // Monta link do WhatsApp com contexto da vaga
+    const jobTitle = document.getElementById("modal-title").textContent;
+    const msg = encodeURIComponent(`Olá! Acabei de me candidatar à vaga de *${jobTitle}* pelo portal da 3778 Saúde. Gostaria de saber mais sobre o processo seletivo.`);
+    document.getElementById("btn-whatsapp").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
     document.getElementById("modal-box").scrollTop = 0;
   }
 }
+
+// Escuta o evento de envio do formulário Tally via postMessage
+window.addEventListener("message", function(e) {
+  if (e.data && e.data.event === "Tally.FormSubmitted") {
+    showStep(3);
+  }
+});
 
 function goToForm()    { showStep(2); }
 function goToDetails() { showStep(1); }
